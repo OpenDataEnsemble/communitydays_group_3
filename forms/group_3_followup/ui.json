@@ -1,0 +1,20 @@
+{
+  "type": "VerticalLayout",
+  "elements": [
+    {
+      "type": "Control",
+      "scope": "#/properties/topic",
+      "label": "Session topic"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/attendance",
+      "label": "Number attending"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/understanding",
+      "label": "Group understanding"
+    }
+  ]
+}

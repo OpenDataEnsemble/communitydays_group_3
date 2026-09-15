@@ -1,0 +1,55 @@
+{
+  "title": "Education App",
+  "theme": "Education",
+  "entity": "learning club",
+  "plural": "learning clubs",
+  "registerLabel": "Register learning club",
+  "followUpLabel": "Record a club session",
+  "registrationForm": "group_3_registration",
+  "followUpForm": "group_3_followup",
+  "description": "Bring curious minds together and keep a simple record of learning sessions.",
+  "accent": "#315db2",
+  "background": "#edf3ff",
+  "columns": [
+    {
+      "key": "name",
+      "label": "Club name"
+    },
+    {
+      "key": "subject",
+      "label": "Main subject"
+    },
+    {
+      "key": "venue",
+      "label": "Meeting venue"
+    }
+  ],
+  "registrationFields": [
+    {
+      "key": "name",
+      "label": "Club name"
+    },
+    {
+      "key": "subject",
+      "label": "Main subject"
+    },
+    {
+      "key": "venue",
+      "label": "Meeting venue"
+    }
+  ],
+  "followUpFields": [
+    {
+      "key": "topic",
+      "label": "Session topic"
+    },
+    {
+      "key": "attendance",
+      "label": "Number attending"
+    },
+    {
+      "key": "understanding",
+      "label": "Group understanding"
+    }
+  ]
+}
