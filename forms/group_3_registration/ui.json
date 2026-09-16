@@ -15,6 +15,11 @@
       "type": "Control",
       "scope": "#/properties/venue",
       "label": "Meeting venue"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/description",
+      "label": "Short description"
     }
   ]
 }

@@ -19,6 +19,11 @@
       "title": "Meeting venue",
       "minLength": 1,
       "maxLength": 240
+    },
+    "description": {
+      "type": "string",
+      "title": "Short description",
+      "maxLength": 120
     }
   },
   "required": [
