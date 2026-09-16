@@ -1,7 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 import config from './theme.json';
 import useObservations from './useObservations.js';
+
+export function filterRegistrationsByName(registrations, searchTerm = '') {
+  const query = String(searchTerm ?? '').trim().toLowerCase();
+  if (!query) return registrations;
+  return registrations.filter((item) => display(item?.data?.name ?? '').toLowerCase().includes(query));
+}
 
 function display(value) {
   if (value === null || value === undefined || value === '') return '—';
@@ -24,7 +30,9 @@ function Fields({ fields, data }) {
 function RecordPage() {
   const { entityId } = useParams();
   const { api, registrations, followUps, loading, error, formError, opening, refresh, openForm } = useObservations(entityId);
+  const [searchTerm, setSearchTerm] = useState('');
   const record = registrations.find((item) => item.observationId === entityId);
+  const filteredRegistrations = filterRegistrationsByName(registrations, searchTerm);
   const disabled = !api || opening;
   const registrationFields = config.registrationFields.some(({ key }) => key === 'name')
     ? config.registrationFields
@@ -66,22 +74,41 @@ function RecordPage() {
         )}
         {formError && <p className="error" role="alert">Could not complete the form. {formError} Please try the form button again.</p>}
         {!entityId ? (
-          registrations.length > 0 ? (
-            <div className="table-scroll" role="region" aria-label={`${config.plural} list`} tabIndex={0}>
-              <table>
-                <caption>Saved {config.plural}</caption>
-                <thead><tr>{config.columns.map(({ key, label }) => <th scope="col" key={key}>{label}</th>)}<th scope="col">Details</th></tr></thead>
-                <tbody>
-                  {registrations.map((item) => (
-                    <tr key={item.observationId}>
-                      {config.columns.map(({ key }) => <td key={key}>{display(item.data?.[key])}</td>)}
-                      <td><Link className="detail-link" to={`/details/${encodeURIComponent(item.observationId)}`} aria-label={`View details for ${display(item.data?.name)}`}>View details →</Link></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <>
+            <div className="search-panel">
+              <label htmlFor="club-search">Search by club name</label>
+              <input
+                id="club-search"
+                type="search"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                placeholder="Search learning clubs"
+              />
             </div>
-          ) : !loading && !error && api && <p className="empty">No {config.plural} yet. Select “{config.registerLabel}” to get started.</p>
+            {api && (
+              <p className="search-summary">{filteredRegistrations.length} matching out of {registrations.length} registered</p>
+            )}
+            {registrations.length > 0 ? (
+              filteredRegistrations.length === 0 ? (
+                <p className="empty">No {config.plural} match “{searchTerm.trim()}”. Try another club name.</p>
+              ) : (
+                <div className="table-scroll" role="region" aria-label={`${config.plural} list`} tabIndex={0}>
+                  <table>
+                    <caption>Saved {config.plural}</caption>
+                    <thead><tr>{config.columns.map(({ key, label }) => <th scope="col" key={key}>{label}</th>)}<th scope="col">Details</th></tr></thead>
+                    <tbody>
+                      {filteredRegistrations.map((item) => (
+                        <tr key={item.observationId}>
+                          {config.columns.map(({ key }) => <td key={key}>{display(item.data?.[key])}</td>)}
+                          <td><Link className="detail-link" to={`/details/${encodeURIComponent(item.observationId)}`} aria-label={`View details for ${display(item.data?.name)}`}>View details →</Link></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )
+            ) : !loading && !error && api && <p className="empty">No {config.plural} yet. Select “{config.registerLabel}” to get started.</p>}
+          </>
         ) : record ? (
           <>
             <Fields fields={registrationFields} data={record.data} />
