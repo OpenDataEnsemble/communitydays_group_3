@@ -7,9 +7,10 @@
   "followUpLabel": "Record a club session",
   "registrationForm": "group_3_registration",
   "followUpForm": "group_3_followup",
-  "description": "Bring curious minds together and keep a simple record of learning sessions.",
-  "accent": "#315db2",
-  "background": "#edf3ff",
+  "description": "Your friendly community where learning clubs come together, share ideas, and grow through learning while recording their journey.",
+
+  "accent": "#795548",
+  "background": "#F7F2EE",
   "columns": [
     {
       "key": "name",
@@ -36,6 +37,10 @@
     {
       "key": "venue",
       "label": "Meeting venue"
+    },
+    {
+      "key": "description",
+      "label": "Short description"
     }
   ],
   "followUpFields": [
