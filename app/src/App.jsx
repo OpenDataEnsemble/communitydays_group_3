@@ -123,7 +123,12 @@ export default function App() {
       </header>
       <main id="main-content" tabIndex={-1}>
         <section className="hero" aria-labelledby="app-title">
-          <div><p className="eyebrow">{config.theme}</p><h1 id="app-title">{config.title}</h1><p>{config.description}</p></div>
+          <div>
+            <p className="eyebrow">{config.theme}</p>
+            <h1 id="app-title">{config.title}</h1>
+            <p className="welcome-line">Welcome to <span className="welcome-brand">{config.title}</span><span className="welcome-mark">!</span></p>
+            <p>{config.description}</p>
+          </div>
           <img src="./assets/theme.svg" alt="" width="220" height="180" />
         </section>
         <Routes>

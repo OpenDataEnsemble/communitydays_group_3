@@ -29,11 +29,11 @@ button {
   border-radius: 0.75rem;
   padding: 0.7rem 1.1rem;
   min-height: 44px;
-  background: #172c31;
-  color: white;
+  background: #795548;
+  color: #fffaf5;
 }
 button:hover:not(:disabled) {
-  background: #30494f;
+  background: #68473c;
 }
 button:disabled {
   opacity: 0.55;
@@ -111,6 +111,25 @@ footer {
   justify-content: space-between;
   gap: 2rem;
   padding: 2rem 0 3rem;
+}
+.welcome-line {
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #172c31;
+}
+.welcome-brand {
+  display: inline-block;
+  color: var(--accent, #367a58);
+  font-weight: 800;
+}
+.welcome-mark {
+  display: inline-block;
+  margin-left: 0.12rem;
+  font-size: 1.9em;
+  line-height: 0.8;
+  vertical-align: middle;
+  color: var(--accent, #367a58);
 }
 .hero p:last-child {
   max-width: 60ch;
